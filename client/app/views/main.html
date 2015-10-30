@@ -1,0 +1,121 @@
+<div ng-controller="MainCtrl">
+  <div class="row">
+      <div class="col-md-12">
+       <h2>Admin Dashboard</h2>
+      </div>
+  </div>
+   <!-- /. ROW  -->
+  <div class="row">
+  <div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="panel panel-primary text-center no-boder bg-color-green">
+          <div class="panel-body">
+              <i class="fa fa-thumbs-o-up fa-5x"></i>
+              <h3>
+                {{getActiveInstance()}}
+              </h3>
+          </div>
+          <div class="panel-footer back-footer-green">
+             Online instances
+          </div>
+      </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="panel panel-primary text-center no-boder bg-color-red">
+          <div class="panel-body">
+              <i class="fa fa-exclamation-circle fa-5x"></i>
+              <h3>
+                {{getCrashedInstance()}}
+              </h3>
+          </div>
+          <div class="panel-footer back-footer-red">
+              Crashed Instances
+          </div>
+      </div>
+    </div>
+  </div>
+   <!-- /. ROW  -->
+   <!-- /. ROW  -->
+  <div class="row">
+    <div class="col-md- col-sm-12 col-xs-12">
+      <div class="panel-danger" style="color:green">
+        <strong style="font-size: 20px;">
+          Number of instances
+        </strong>
+      </div>
+      <div style="background-color:#000">
+        <canvas id="canvas" style="height:250px;width:100%;"></canvas>
+      </div>
+    </div>
+  </div>
+  <!-- /. ROW  -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="chat-panel panel panel-default "style="background-color:#000;color:green;" >
+        <i class="fa fa-rss fa-fw"style="font-size: 20px;"/>
+        <strong style="font-size: 20px;">
+         Live Feed
+        </strong>
+        <div class="panel-body">
+            <ul class="chat-box" ng-repeat="feed in live_feed  | filter:IsSelectedSession() track by $index">
+              <li class="left clearfix">
+                <span class="chat-img pull-left">
+                  <img ng-src="{{feed.image_path}}" alt="User" class="img-circle" />
+                </span>
+                <div class="chat-body">
+                  <strong>
+                    {{feed.username}}
+                  </strong>
+                  <small class="pull-right text-muted">
+                    <i class="fa fa-clock-o fa-fw"/>
+                    {{feed.timestamp}}
+                  </small>
+                  <p>
+                    {{feed.msg}}
+                  </p>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="chat-panel panel panel-default "style="background-color:#000;color:green;">
+        <i class="fa fa-users fa-fw"style="font-size: 20px;"/>
+        <strong style="font-size: 20px;">
+         Users
+       </strong>
+        <div class="panel-body">
+          <ul class="chat-box" ng-repeat="active_user in active_users | filter:IsSelectedTool()">
+            <li ng-class="{ highlight: IsSelected(active_user)}" class="left clearfix" ng-click="clicked_active_user(active_user)">
+              <span class="chat-img pull-left">
+                <img src="images/3.png" alt="User" class="img-circle" />
+              </span>
+              <div class="chat-body">
+                <strong >
+                  {{active_user.username}}
+                </strong>
+                <input placeholder="Command to Run" class="form-control text-muted" style="display:inline;width:30%;background-color:#222;color:green;" type="text" ng-model="name" ng-keydown="$event.which === 13 && submitCommand(name,active_user.session_id)">
+                <p class="pointer fa fa-terminal fa-0.5x" ng-click="submitCommand(name,active_user.session_id)"/>
+                <small class="pull-right text-muted">
+                  <i class="fa fa-clock-o fa-fw"/>
+                  {{active_user.session_start}}
+                  <br>
+                  Tool: {{active_user.tool}}
+                  <br>
+                  Version: {{active_user.version}}
+                  <br>
+                  <i class="fa fa-cog fa-fw"/>
+                  {{active_user.platform}}
+                </small>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app/scripts/Chart.js"></script>
+  <script src="app/scripts/controllers/chartController.js"></script>
+  <script src="app/scripts/initScripts/main.js"></script>
+</div>
+ <!-- /. ROW  -->

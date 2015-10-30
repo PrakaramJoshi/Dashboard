@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
+     <!-- CUSTOM STYLES-->
+     <link href="app/styles/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body ng-app="clientApp">
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Admininstrator</a>
+            </div>
+  <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"><strong  id="current_date"> Logged in at :</strong> </div>
+        </nav>
+           <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation" ng-controller="NavCtrl">
+          <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+        			<li class="text-center">
+                <img src="images/find_user.png" class="user-image img-responsive"/>
+        			</li>
+              <li>
+                <a ng-class="{ activemenu: isActive('/')}" ng-href="#/"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+              </li>
+              <li>
+                <a ng-class="{ activemenu: isActive('/about')}" ng-href="#/about"><i class="fa fa-info-circle fa-3x"></i> About</a>
+              </li>
+              <li>
+                <a ng-class="{ activemenu: isActive('/active_tools')}" ng-href="#/active_tools"><i class="fa fa-sitemap fa-3x"></i>  Active Tools<span class="fa arrow"></span></a>
+                 <ul class="nav nav-second-level" ng-repeat="tool in active_tools">
+                   <li>
+                     <a  ng-href="#/tool/{{tool}}" >
+                      {{tool}}
+                     </a>
+                   </li>
+                 </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div id="page-wrapper" >
+            <div id="page-inner">
+              <div ng-view=""></div>
+            </div>
+        </div>
+
+  </div>
+         <!-- /. PAGE WRAPPER  -->
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="app/scripts/custom.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="app/scripts/jquery.metisMenu.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="app/scripts/app.js"></script>
+    <script src="app/scripts/controllers/main.js"></script>
+    <script src="app/scripts/controllers/about.js"></script>
+    <script src="app/scripts/controllers/navController.js"></script>
+
+
+
+</body>
+</html>
